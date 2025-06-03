@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%; /* Dark theme background */
+    --foreground: 213 31% 91%; /* Dark theme text */
+    
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+    
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+    
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+    
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    
+    --primary: 210 40% 98%; /* Primary elements in dark theme (e.g., active buttons) */
+    --primary-foreground: 222.2 47.4% 1.2%; /* Text on primary elements */
+    
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --ring: 216 34% 17%;
+    
+    --radius: 0.5rem;
+  }
+
+  .light {
+    --background: 200 20% 98%; /* Light theme background (e.g., off-white) */
+    --foreground: 222.2 47.4% 11.2%; /* Light theme text (e.g., dark gray/black) */
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 90.1%; /* Lighter accent for light theme */
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 262.1 83.3% 57.8%; /* Purple for primary buttons in light theme */
+    --primary-foreground: 210 40% 98%; /* White text on purple buttons */
+    
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 262.1 83.3% 57.8%; /* Ring color for light theme */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+.gradient-bg-dark-auth { /* Specific for dark theme auth pages if needed */
+  background: linear-gradient(135deg, hsl(224, 71%, 10%), hsl(260, 60%, 15%), hsl(280, 50%, 12%));
+}
+
+.glass-card {
+  @apply dark:bg-background/60 dark:backdrop-blur-lg dark:border dark:border-border/50 dark:shadow-2xl;
+  /* Light mode will have a solid background defined by card variables */
+  @apply bg-[hsl(var(--card))] border shadow-md; /* Use CSS variable for light theme card background */
+}
+
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjusted from -20px */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.text-gradient { /* This gradient is for dark theme text */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #818cf8, #a78bfa, #e879f9); /* Lighter gradient for dark theme */
+}
+
+.light .text-gradient { /* Override for light theme if a different text gradient is desired */
+   background-image: linear-gradient(to right, #4f46e5, #7c3aed, #c026d3); /* Original darker gradient for light theme */
+}
+
+/* Specific button styles for auth pages in light theme */
+.light .auth-button-primary {
+  @apply bg-slate-800 text-white hover:bg-slate-700;
+}
+.light .auth-button-secondary {
+   @apply border-slate-300 text-slate-700 hover:bg-slate-100;
+}
+
+.dark .auth-button-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+.dark .auth-button-secondary {
+  @apply border-border text-foreground hover:bg-accent;
+}
